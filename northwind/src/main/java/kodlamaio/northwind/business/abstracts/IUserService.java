@@ -9,4 +9,5 @@ public interface IUserService {
 	Result add(User user);
 
 	DataResult<User> findByEmanil(String email);
+
 }
