@@ -27,7 +27,7 @@ public class Category {
 	private int categoryId;
 
 	@Column(name = "category_name")
-	private String category_name;
+	private String categoryName;
 
 	@OneToMany(mappedBy = "category") // product entitysi içerisindeki category e eşit olacak
 	private List<Product> products;

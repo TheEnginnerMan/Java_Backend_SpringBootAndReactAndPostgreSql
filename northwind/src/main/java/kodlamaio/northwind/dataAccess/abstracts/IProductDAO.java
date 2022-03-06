@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import kodlamaio.northwind.entities.concretes.Product;
+import kodlamaio.northwind.entities.dtos.ProductWithCategoryDto;
 
 //JPARepository<T,D> verilen veri tipi için yani Entity anotationu ile süslenmiş nesne için yani 
 //burdaki Product için,primary key alanınıda vererek sorguları ona göre hazırlar <T=Entity,D=primarkey tipi
@@ -29,4 +30,7 @@ public interface IProductDAO extends JpaRepository<Product, Integer> {
 	// categorisinin categori idsi ise category.categoryid diye çağrılır.
 	@Query("From Product where productName = :productName and category.categoryId =:categoryId")
 	List<Product> getByNameAndCategory(String productName, int categoryId);
+
+	@Query("Select new kodlamaio.northwind.entities.dtos.ProductWithCategoryDto(p.id, p.productName, c.categoryName) From Category c Inner Join c.products p")
+	List<ProductWithCategoryDto> getProductWithCategoryDetails();
 }
